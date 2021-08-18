@@ -29,5 +29,5 @@ do
   echo -e "$i\t\c" >> homo_callabilityraw_tableGQ$GQ.txt
   echo -e "$(zcat homocandidates.filtered.vcf.gz | grep -v '#' | wc -l)\t\c" >> homo_callabilityraw_tableGQ$GQ.txt
   echo -e "$(bcftools query -i'FORMAT/GQ[0] > '$GQ' && FORMAT/GQ[1] > '$GQ homocandidates.filtered.vcf.gz -f '%CHROM\t%POS\n' | wc -l)\t\c" >> homo_callabilityraw_tableGQ$GQ.txt
-  echo -e "$(cat pileup_homoGQ$GQ.txt | wc -l)" >> homo_callabilityraw_tableGQ$GQ.txt
+  echo -e "$(cat pileup_homoGQ$GQ.txt | wc -l)" >> homo_callability_tableGQ$GQ.txt
 done
