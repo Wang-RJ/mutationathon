@@ -12,7 +12,7 @@
 library(dplyr)
 options(stringsAsFactors = FALSE)
 
-source("bcfm_denovo_utilities.R")
+source("denovo_utilities.R")
 ## Imports set of functions for dealing with lists of dataframes, each a collection of de novo candidates from a different trio
 ## Querying functions
 #   extract_genotype_entry <- function(genotypes_list, column)
@@ -96,7 +96,7 @@ dpgq_gq <- extract_gq(candidates_DP_GQ)
 # $ bcftools mpileup -Ou -A -f /N/dcwan/projects/hahnlab-phi/macaque/ref/ref-relabeled.fna -Q 10 -R cpos_DP_GQ.txt -a ADF,ADR,AD,DP bam_files/*.bam | bcftools call -m -Ov -o bcfpileup_mcompetition.vcf &
 # $ grep -v '##' bcfpileup_mcompetition.vcf > bcfpileup_mcompetition.decap.vcf
 
-source("bcfm_processBAM.R")
+source("processBAM.R")
 candidates_DP_GQ_BAM <- filter_bam(candidates_DP_GQ)
 # candidates_DP_GQ_BAMAD1 <- filter_bamAD1(candidates_DP_GQ)
 
