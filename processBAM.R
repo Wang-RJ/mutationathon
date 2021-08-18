@@ -1,4 +1,4 @@
-# Must be in macaque/bcfmendel_raw
+# Must be in bam mpileup directory
 
 rawbam_bcfcalls <- read.table("bcfpileup_mcompetition.decap.vcf", comment.char = "", header = TRUE)
 names(rawbam_bcfcalls) <- gsub("X\\.", "", names(rawbam_bcfcalls))
