@@ -89,11 +89,12 @@ dpgq_gq <- extract_gq(candidates_DP_GQ)
 # hist(unlist(dpgq_depths), xlab = "depth", main = "filtered [20,80]")
 # hist(unlist(dpgq_gq), xlab = "GQ", main = "filtered > 20")
 
+## prepare a list of candidates for bcftools mpileup step
 # candidate_positions <- lapply(candidates_DP_GQ, select, 1:2) %>% do.call(rbind, .)
 # candidate_positions <- candidate_positions[order(candidate_positions[,1], candidate_positions[,2]),]
 # write.table(candidate_positions, file = "cpos_DP_GQ.txt", quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
 #
-# ref-relabeled.fna is reference genome with chromosomes relabeled as chr1,chr2,etc.
+## ref-relabeled.fna is reference genome with chromosomes relabeled as chr1,chr2,etc.
 # $ bcftools mpileup -Ou -A -f /N/dcwan/projects/hahnlab-phi/macaque/ref/ref-relabeled.fna -Q 10 -R cpos_DP_GQ.txt -a ADF,ADR,AD,DP bam_files/*.bam | bcftools call -m -Ov -o bcfpileup_mcompetition.vcf &
 # $ grep -v '##' bcfpileup_mcompetition.vcf > bcfpileup_mcompetition.decap.vcf
 
