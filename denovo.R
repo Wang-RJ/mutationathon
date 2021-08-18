@@ -93,19 +93,9 @@ dpgq_gq <- extract_gq(candidates_DP_GQ)
 # candidate_positions <- candidate_positions[order(candidate_positions[,1], candidate_positions[,2]),]
 # write.table(candidate_positions, file = "cpos_DP_GQ.txt", quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
 #
+# ref-relabeled.fna is reference genome with chromosomes relabeled as chr1,chr2,etc.
 # $ bcftools mpileup -Ou -A -f /N/dcwan/projects/hahnlab-phi/macaque/ref/ref-relabeled.fna -Q 10 -R cpos_DP_GQ.txt -a ADF,ADR,AD,DP bam_files/*.bam | bcftools call -m -Ov -o bcfpileup_mcompetition.vcf &
 # $ grep -v '##' bcfpileup_mcompetition.vcf > bcfpileup_mcompetition.decap.vcf
 
 source("processBAM.R")
 candidates_DP_GQ_BAM <- filter_bam(candidates_DP_GQ)
-# candidates_DP_GQ_BAMAD1 <- filter_bamAD1(candidates_DP_GQ)
-
-idx <- match(paste(candidates_DP_GQ_BAM[[1]][,1], candidates_DP_GQ_BAM[[1]][,2]), gatkgt_brief_upos)
-cbind(gatkgt_brief[idx,], transmission = extract_transflag(candidates_DP_GQ_BAM))
-
-denovo_candidates <- bind_candidates(candidates_DP_GQ_BAM %>% filter_allelicbalance(0.35, 1))
-# After manual observation, chr3:76549728 appears to be a screwup in GATK's readbackphasing
-# bam file shows transmission to grandchild
-denovo_candidates[1,12] <- TRUE
-names(denovo_candidates)[12] <- "transmit_flag"
-names(denovo_candidates)[13] <- "trio"
